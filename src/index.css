@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: "Raleway", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: white;
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+.it {
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  font-weight: 600;
+  color: #fba820;
+  text-decoration: inherit;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #528dff;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: black;
+}
+
+h1,
+h3 {
+  font-family: "Manrope", sans-serif;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 3px;
+  padding: 0.6em 1.2em;
+  font-size: 22px;
+  font-family: inherit;
+  background-color: #f38e04;
+  /* background: linear-gradient(180deg, #f38e04 0%, #c17000 100%); */
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.09); */
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+button:hover {
+  /* background: linear-gradient(180deg, #fcac3c 0%, #b9863f 100%); */
+  background-color: #528dff;
+}
+button:focus,
+button:focus-visible {
+  /* outline: 4px auto -webkit-focus-ring-color; */
+}
+
+.loader {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  inset: 0;
+  background-color: #000;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.loader img {
+  width: 60px;
+  /* transition: all 0.5s; */
+  animation: 4s infinite pump ease-out;
+}
+
+@keyframes pump {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.change-project-arrow {
+  display: flex;
+  place-items: center;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border-radius: 6px;
+  padding: 8px;
+  transition: transform 0.3s ease-in-out, background-color 0.3s;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(60px);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}
+
+@keyframes bounce-out {
+  0% {
+    transform: translateX(40px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.change-project-arrow:hover {
+  transform: translateX(10px);
+  background-color: #f38e04;
+}
+
+.move-arrow-in {
+  animation: 0.6s bounce-in ease forwards;
+}
+
+.move-arrow-out {
+  animation: 0.6s bounce-out ease forwards;
+}
+
+.gallery-dot.active {
+  background-color: #f38e04;
+}
+
+.screenshot {
+  object-position: top;
+  height: 450px;
+}
+
+.logo-color {
+  transition: all 0.3s ease;
+}
+
+.logo:hover .logo-color {
+  fill: #f38e04;
+  /* opacity: 0.7; */
+}
+
+/* transitions */
+
+.slide-left-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.slide-left-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-left-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-left-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.slide-left-enter-active,
+.slide-left-exit-active {
+  transition: transform 0.3s ease-in-out, opacity 0.3s;
+}
+
+.slide-right-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.slide-right-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-right-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-right-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.slide-right-enter-active,
+.slide-right-exit-active {
+  transition: transform 0.3s ease-in-out, opacity 0.3s;
+}
+
+.slide-fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.slide-fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide-fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide-fade-exit-active {
+  opacity: 0;
+  /* transform: translateY(10%); */
+}
+.slide-fade-enter-active,
+.slide-fade-exit-active {
+  transition: transform 0.3s ease-in-out, opacity 0.3s;
+}
