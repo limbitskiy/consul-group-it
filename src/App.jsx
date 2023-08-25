@@ -42,7 +42,7 @@ const Navigation = ({ navigation, setNavigation, device }) => {
     );
   } else if (device === "mobile") {
     return (
-      <ul className="navigation flex justify-between w-full sm:gap-20 sm:mx-auto sm:w-auto">
+      <ul className="navigation flex gap-12 justify-center w-full mt-8 sm:gap-20 sm:mx-auto sm:w-auto">
         {navigation.map((item) => {
           if (item.id === 0) return null;
           return (
@@ -132,12 +132,16 @@ function App() {
 
   return (
     <>
-      <div className="screen w-screen h-screen relative z-10">
+      <div className="screen w-screen relative z-10">
         <div
           className="logo-mobile lg:hidden"
           onClick={() => setActiveScreen(setNavigation, 0)}
         >
-          <img className="absolute top-5 left-6 z-50" src={logo} alt="Logo" />
+          <img
+            className="absolute top-5 left-6 z-50 w-32"
+            src={logo}
+            alt="Logo"
+          />
         </div>
         <div className="video-container absolute z-0 w-full h-full overflow-hidden">
           <video

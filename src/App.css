@@ -1,6 +1,10 @@
 #root {
 }
 
+.screen {
+  height: 100vh;
+}
+
 .consul-container {
   max-width: 1440px;
 }
@@ -26,7 +30,7 @@
 }
 
 .content {
-  height: calc(100vh - 96px);
+  height: calc(100svh - 96px);
 }
 
 .filter-brightness-50 {

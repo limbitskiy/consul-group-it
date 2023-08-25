@@ -31,7 +31,13 @@ export default function Home({ setNavigation }) {
         управления недвижимым имуществом.{" "}
       </h4>
       <button
-        className="w-min px-16 py-3 font-medium mt-8 mx-auto lg:mx-0"
+        className="w-min px-10 py-2 font-medium mt-8 hidden lg:block sm:px-16 sm:py-3 mx-auto lg:mx-0"
+        onClick={() => gotoProjects(setNavigation)}
+      >
+        Проекты
+      </button>
+      <button
+        className="mobile-btn w-min px-10 py-2 font-medium mt-8 sm:px-16 sm:py-3 mx-auto lg:mx-0 lg:hidden"
         onClick={() => gotoProjects(setNavigation)}
       >
         Проекты

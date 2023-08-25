@@ -67,7 +67,7 @@ button {
   cursor: pointer;
   transition: 0.3s ease;
 }
-button:hover {
+button:not(.mobile-btn):hover {
   /* background: linear-gradient(180deg, #fcac3c 0%, #b9863f 100%); */
   background-color: #528dff;
 }
@@ -84,6 +84,7 @@ button:focus-visible {
   background-color: #000;
   z-index: 999;
   pointer-events: none;
+  height: 100vh;
 }
 
 .loader img {
@@ -105,7 +106,6 @@ button:focus-visible {
 }
 
 .change-project-arrow {
-  display: flex;
   place-items: center;
   cursor: pointer;
   width: 45px;
@@ -113,6 +113,14 @@ button:focus-visible {
   border-radius: 6px;
   padding: 8px;
   transition: transform 0.3s ease-in-out, background-color 0.3s;
+}
+
+.change-project-arrow-mobile {
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 6px;
+  padding: 8px;
 }
 
 @keyframes bounce-in {

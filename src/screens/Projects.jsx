@@ -10,20 +10,16 @@ import ownexLogo from "../assets/ownex-logo.svg";
 // transitions
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 
-// icons
-import { FiChevronsRight } from "react-icons/fi";
-
 const RenderDescription = ({ project, switchProject }) => {
   const [link, setLink] = useState("");
   const [arrowHoverOver, setArrowHoverOver] = useState(null);
-  // const [arrowHoverOut, setArrowHoverOut] = useState(false)
 
   useEffect(() => {
     let interval;
     let counter = 0;
 
     interval = setInterval(() => {
-      if (counter < project.link.length - 1) {
+      if (counter < project.link.length) {
         const letter = project.link[counter];
         setLink((prev) => prev + letter);
         counter += 1;
@@ -34,7 +30,7 @@ const RenderDescription = ({ project, switchProject }) => {
   }, []);
 
   return (
-    <div className="prod-desc flex flex-col gap-6 md:mb-24 lg:mb-44">
+    <div className="prod-desc flex flex-col gap-2 sm:gap-6 md:mb-24 lg:mb-44">
       <div className="prod-title flex items-center gap-4 mt-16 sm:mt-10">
         {project.id === 0 ? (
           <img
@@ -47,13 +43,8 @@ const RenderDescription = ({ project, switchProject }) => {
             {project.title}
           </h3>
         )}
-        {/* <FiChevronsRight
-          size={48}
-          className="cursor-pointer change-project-arrow"
-          onClick={switchProject}
-        /> */}
         <div
-          className="change-project-arrow"
+          className="change-project-arrow hidden lg:flex"
           onClick={switchProject}
           onMouseEnter={() => setArrowHoverOver(true)}
           onMouseLeave={() => setArrowHoverOver(false)}
@@ -85,8 +76,39 @@ const RenderDescription = ({ project, switchProject }) => {
             />
           </svg>
         </div>
+        <div
+          className="change-project-arrow-mobile flex lg:hidden"
+          onClick={switchProject}
+        >
+          <svg
+            viewBox="0 0 330 244"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+          >
+            <path
+              className={`chevron-1 ${
+                arrowHoverOver ? "move-arrow-in" : "move-arrow-out"
+              }`}
+              d="M21.518 223L122 122L21.518 21"
+              stroke="white"
+              strokeWidth="42"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              className={`chevron-2 ${
+                arrowHoverOver ? "move-arrow-in" : "move-arrow-out"
+              }`}
+              d="M153 223L253.482 122L153 21"
+              stroke="white"
+              strokeWidth="42"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
       </div>
-      <p className="text-xl leading-9 sm:text-2xl lg:max-w-3xl">
+      <p className="text-md leading-9 sm:text-2xl lg:max-w-3xl">
         {project.desc}
       </p>
       <p className="text-gray-400">
@@ -190,14 +212,14 @@ export default function Projects() {
       id: 0,
       title: "Ownex",
       desc: "Современная технологическая платформа с широким набором возможностей и инструментов. Может выступить единой цифровой информационно-сервисной площадкой, которая выполнит функцию налогового мониторинга в отношении налогообложения объектов недвижимого имущества",
-      link: "https://ownex.pro/landing/",
+      link: "https://ownex.pro/",
       screenshots: [ownex1, ownex2, ownex3, ownex4],
     },
     {
       id: 1,
       title: "M3",
       desc: "M3 - cовременная технологическая платформа с широким набором возможностей и инструментов. Может выступить единой цифровой информационно-сервисной площадкой, которая выполнит функцию налогового мониторинга в отношении налогообложения объектов недвижимого имущества",
-      link: "https://m3.pro/landing/",
+      link: "https://m3.pro/",
       screenshots: [m31, m32],
     },
   ];
