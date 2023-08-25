@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Mission() {
   return (
     <div className="flex flex-col gap-5 mt-12 md:mt-0 md:mb-40">

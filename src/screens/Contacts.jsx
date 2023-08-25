@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Mission() {
   return (
     <div className="flex flex-col mt-12 gap-5 sm:mt-0 md:gap-8 md:mb-40">
@@ -30,7 +28,7 @@ export default function Mission() {
           </ul>
         </div>
       </div>
-      <p className="text-md max-w-3xl leading-6 sm:leading-10 md:mt-12 md:text-xl">
+      <p className="text-md max-w-3xl leading-6 md:leading-10 md:mt-12 md:text-xl">
         С{" "}
         <span className="text-blue-400 font-semibold">
           Пн по Пт с 9:00 до 17:00{" "}

@@ -1,5 +1,3 @@
-import React from "react";
-
 const gotoProjects = (setNavigation) => {
   setNavigation((items) => {
     const clone = [...items];
@@ -26,7 +24,7 @@ export default function Home({ setNavigation }) {
           </span>
         </div>
       </div>
-      <h4 className="text-xl max-w-4xl leading-10 lg:text-start text-center sm:text-2xl md:text-3xl md:leading-10">
+      <h4 className="text-xl max-w-4xl leading-8 lg:text-start text-center sm:text-2xl md:text-3xl md:leading-10">
         Ведущий разработчик инновационного программного обеспечения для
         управления недвижимым имуществом.{" "}
       </h4>

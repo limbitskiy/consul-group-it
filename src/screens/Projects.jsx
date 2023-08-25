@@ -10,6 +10,16 @@ import ownexLogo from "../assets/ownex-logo.svg";
 // transitions
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 
+const preloadSrcList = [ownex1, ownex2, ownex3, ownex4, m31, m32];
+
+// const preloadImages = (src) => new Promise((res) => {
+//   const img = new Image()
+//   img.onload = () => {
+//     res(img)
+//   }
+//   img.src = src
+// })
+
 const RenderDescription = ({ project, switchProject }) => {
   const [link, setLink] = useState("");
   const [arrowHoverOver, setArrowHoverOver] = useState(null);
@@ -108,7 +118,7 @@ const RenderDescription = ({ project, switchProject }) => {
           </svg>
         </div>
       </div>
-      <p className="text-md leading-9 sm:text-2xl sm:leading-9 lg:max-w-3xl">
+      <p className="text-md leading-8 sm:text-2xl md:leading-9 lg:max-w-3xl">
         {project.desc}
       </p>
       <p className="text-gray-400">
@@ -127,6 +137,13 @@ const RenderGallery = ({ project }) => {
   const [lastState, setLastState] = useState({});
 
   const nodeRef3 = useRef(null);
+
+  useEffect(() => {
+    preloadSrcList.forEach((item) => {
+      const img = new Image();
+      img.src = item;
+    });
+  }, []);
 
   const handleFullScreen = (ref) => {
     if (isFullScreen) {
