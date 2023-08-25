@@ -108,7 +108,7 @@ const RenderDescription = ({ project, switchProject }) => {
           </svg>
         </div>
       </div>
-      <p className="text-md leading-9 sm:text-2xl lg:max-w-3xl">
+      <p className="text-md leading-9 sm:text-2xl sm:leading-9 lg:max-w-3xl">
         {project.desc}
       </p>
       <p className="text-gray-400">

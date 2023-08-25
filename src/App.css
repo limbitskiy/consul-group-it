@@ -29,6 +29,10 @@
   color: white;
 }
 
+.nav-item-mobile.active {
+  color: #f38e04;
+}
+
 .content {
   height: calc(100svh - 96px);
 }

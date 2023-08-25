@@ -2,13 +2,23 @@ import { useState, useEffect, useRef } from "react";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import "./App.css";
 import videoBg from "./assets/building-timelapse2.mp4";
+import videoBgSmall from "./assets/building-timelapse-cropped.mp4";
 import spinner from "./assets/logo-once.gif";
-import logo from "./assets/logo.svg";
+import logoMobile from "./assets/logo-mobile.svg";
 
+// screens
 import Home from "./screens/Home";
 import Mission from "./screens/Mission";
 import Projects from "./screens/Projects";
 import Contacts from "./screens/Contacts";
+
+// icons
+import {
+  AiOutlineHome,
+  AiOutlineInfoCircle,
+  AiOutlineQuestionCircle,
+} from "react-icons/ai";
+import { BiBriefcase } from "react-icons/bi";
 
 const setActiveScreen = (setNavigation, id) => {
   setNavigation((items) => {
@@ -24,6 +34,13 @@ const setActiveScreen = (setNavigation, id) => {
 };
 
 const Navigation = ({ navigation, setNavigation, device }) => {
+  const icons = {
+    home: <AiOutlineHome size={24} />,
+    info: <AiOutlineInfoCircle size={24} />,
+    briefcase: <BiBriefcase size={24} />,
+    question: <AiOutlineQuestionCircle size={24} />,
+  };
+
   if (device === "desktop") {
     return (
       <ul className="navigation flex gap-20 text-gray-400 mx-auto">
@@ -42,9 +59,8 @@ const Navigation = ({ navigation, setNavigation, device }) => {
     );
   } else if (device === "mobile") {
     return (
-      <ul className="navigation flex gap-12 justify-center w-full mt-8 sm:gap-20 sm:mx-auto sm:w-auto">
+      <ul className="navigation flex gap-16 justify-center items-center w-full mt-8 sm:gap-20 sm:mx-auto sm:w-auto">
         {navigation.map((item) => {
-          if (item.id === 0) return null;
           return (
             <li
               className={`nav-item-mobile relative text-lg transition-colors ${
@@ -53,7 +69,7 @@ const Navigation = ({ navigation, setNavigation, device }) => {
               key={item.id}
               onClick={() => setActiveScreen(setNavigation, item.id)}
             >
-              {item.title}
+              {icons[item.icon]}
             </li>
           );
         })}
@@ -69,24 +85,28 @@ function App() {
       title: "Главная",
       screen: "home",
       active: true,
+      icon: "home",
     },
     {
       id: 1,
       title: "Миссия",
       screen: "mission",
       active: false,
+      icon: "info",
     },
     {
       id: 2,
       title: "Проекты",
       screen: "projects",
       active: false,
+      icon: "briefcase",
     },
     {
       id: 3,
       title: "Контакты",
       screen: "contacts",
       active: false,
+      icon: "question",
     },
   ]);
   const [currentScreen, setCurrentScreen] = useState("home");
@@ -133,20 +153,32 @@ function App() {
   return (
     <>
       <div className="screen w-screen relative z-10">
-        <div
+        {/* <div
           className="logo-mobile lg:hidden"
           onClick={() => setActiveScreen(setNavigation, 0)}
         >
           <img
-            className="absolute top-5 left-6 z-50 w-32"
-            src={logo}
+            className="absolute top-5 right-6 z-50 w-5"
+            src={logoMobile}
             alt="Logo"
           />
-        </div>
+        </div> */}
         <div className="video-container absolute z-0 w-full h-full overflow-hidden">
           <video
             src={videoBg}
-            className="w-full h-full object-cover filter-brightness-50"
+            className="w-full h-full object-cover filter-brightness-50 hidden lg:block"
+            autoPlay
+            loop
+            muted
+            onLoadedData={() => {
+              setVideoLoaded(true);
+              // setTimeout(() => {
+              // }, 5000);
+            }}
+          ></video>
+          <video
+            src={videoBgSmall}
+            className="w-full h-full object-cover filter-brightness-50 lg:hidden"
             autoPlay
             loop
             muted
