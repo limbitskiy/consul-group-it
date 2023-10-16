@@ -15,231 +15,30 @@ import ownexLogo from "../assets/ownex-logo.svg";
 // transitions
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 
-// preload screenshots
-const preloadSrcList = [ownex1, ownex2, ownex3, ownex4, m31, m32, m33, m34];
-
-const RenderDescription = ({ project, switchProject }) => {
-  const [link, setLink] = useState("");
-  const [arrowHoverOver, setArrowHoverOver] = useState(null);
-
-  useEffect(() => {
-    if (!project.link) return;
-    let interval;
-    let counter = 0;
-
-    interval = setInterval(() => {
-      if (counter < project.link.length) {
-        const letter = project.link[counter];
-        setLink((prev) => prev + letter);
-        counter += 1;
-      } else {
-        clearInterval(interval);
-      }
-    }, 30);
-  }, []);
-
+const RenderProject = ({ project }) => {
   return (
-    <div className="prod-desc flex flex-col gap-2 sm:gap-6 md:mb-24 lg:mb-44">
-      <div className="prod-title flex items-center gap-4 mt-16 sm:mt-10">
-        {project.id === 0 ? (
-          <img
-            className="w-36 sm:w-52 md:w-auto"
-            src={ownexLogo}
-            alt="Ownex logo"
-          />
-        ) : (
-          <h3 className="text-4xl font-extrabold sm:text-5xl md:text-7xl">
-            {project.title}
-          </h3>
-        )}
-        <div
-          className="change-project-arrow hidden lg:flex"
-          onClick={switchProject}
-          onMouseEnter={() => setArrowHoverOver(true)}
-          onMouseLeave={() => setArrowHoverOver(false)}
-        >
-          <svg
-            viewBox="0 0 330 244"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-          >
-            <path
-              className={`chevron-1 ${
-                arrowHoverOver ? "move-arrow-in" : "move-arrow-out"
-              }`}
-              d="M21.518 223L122 122L21.518 21"
-              stroke="white"
-              strokeWidth="42"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              className={`chevron-2 ${
-                arrowHoverOver ? "move-arrow-in" : "move-arrow-out"
-              }`}
-              d="M153 223L253.482 122L153 21"
-              stroke="white"
-              strokeWidth="42"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-        <div
-          className="change-project-arrow-mobile flex lg:hidden"
-          onClick={switchProject}
-        >
-          <svg
-            viewBox="0 0 330 244"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-          >
-            <path
-              className={`chevron-1 ${
-                arrowHoverOver ? "move-arrow-in" : "move-arrow-out"
-              }`}
-              d="M21.518 223L122 122L21.518 21"
-              stroke="white"
-              strokeWidth="42"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              className={`chevron-2 ${
-                arrowHoverOver ? "move-arrow-in" : "move-arrow-out"
-              }`}
-              d="M153 223L253.482 122L153 21"
-              stroke="white"
-              strokeWidth="42"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      </div>
-      <p className="text-md leading-8 sm:text-2xl md:leading-9 lg:max-w-3xl">
+    <div className="project-card max-w-xl flex flex-col items-start gap-4">
+      <a href="#">
+        <h3 className="text-3xl font-extrabold sm:text-4xl md:text-6xl">
+          {project.title}
+        </h3>
+      </a>
+      {/* <img className="h-52 object-contain" src={project.screenshots[0]} /> */}
+      <p className="text-md max-w-3xl leading-6 md:leading-8 md:text-md lg:text-xl lg:leading-8 xl:text-2xl xl:leading-10">
         {project.desc}
       </p>
-      {project.link && (
-        <p className="text-gray-400">
-          Подробнее: &nbsp; <br />
-          <a href={project.link} target="_blank" rel="noreferrer">
-            {link}
-          </a>
-        </p>
-      )}
     </div>
   );
-};
-
-RenderDescription.propTypes = {
-  project: PropTypes.object,
-  switchProject: PropTypes.func,
-};
-
-const RenderGallery = ({ project }) => {
-  const [currentScreenshot, setCurrentScreenshot] = useState(0);
-  // const [isFullScreen, setIsFullScreen] = useState(false);
-  // const [lastState, setLastState] = useState({});
-
-  const nodeRef3 = useRef(null);
-
-  useEffect(() => {
-    preloadSrcList.forEach((item) => {
-      const img = new Image();
-      img.src = item;
-    });
-  }, []);
-
-  // const handleFullScreen = (ref) => {
-  //   if (isFullScreen) {
-  //     setIsFullScreen(false);
-  //     ref.current.setAttribute(
-  //       "style",
-  //       `top: ${lastState.y}px; left: ${lastState.x}px; height: ${
-  //         lastState.height
-  //       }px; width: ${lastState.width + 64}px`
-  //     );
-  //     ref.current.classList.remove("absolute");
-  //   } else {
-  //     setIsFullScreen(true);
-  //     ref.current.setAttribute(
-  //       "style",
-  //       `top: ${ref.current.y}px; left: ${ref.current.x}px; height: ${
-  //         ref.current.height
-  //       }px; width: ${ref.current.width + 64}px`
-  //     );
-
-  //     const w = ref.current.width;
-  //     const h = ref.current.height;
-  //     const x = ref.current.x;
-  //     const y = ref.current.y;
-
-  //     setLastState((items) => ({
-  //       ...items,
-  //       x,
-  //       y,
-  //       width: w,
-  //       height: h,
-  //     }));
-
-  //     ref.current.classList.add("absolute");
-
-  //     ref.current.setAttribute(
-  //       "style",
-  //       `top: 50%; left: 50%; transform: translate(-50%, -50%)`
-  //     );
-  //   }
-  // };
-
-  return (
-    <div className="prod-images flex flex-col items-center gap-4">
-      <div className="image-container w-full lg:mt-20 xl:mt-8">
-        <SwitchTransition>
-          <CSSTransition
-            key={currentScreenshot}
-            nodeRef={nodeRef3}
-            timeout={500}
-            classNames="slide-fade"
-          >
-            <img
-              ref={nodeRef3}
-              className={`screenshot transition-all w-full h-full object-contain lg:h-72 xl:h-96`}
-              src={project.screenshots[currentScreenshot]}
-              alt=""
-              // onClick={() => handleFullScreen(nodeRef3)}
-            />
-          </CSSTransition>
-        </SwitchTransition>
-      </div>
-
-      <ul className="dots flex gap-3 items-center">
-        {project.screenshots.map((screenshot, index) => (
-          <li
-            className={`gallery-dot w-2 h-2 bg-white rounded-sm transition-transform cursor-pointer hover:bg-orange-400 ${
-              index === currentScreenshot ? "active scale-150" : ""
-            }`}
-            key={screenshot}
-            onClick={() => setCurrentScreenshot(index)}
-          ></li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-RenderGallery.propTypes = {
-  project: PropTypes.object,
 };
 
 export default function Projects() {
-  const [currentProject, setCurrentProject] = useState(0);
-
   const projects = [
     {
       id: 0,
       title: "Ownex",
       desc: "Современная технологическая платформа с широким набором возможностей и инструментов. Может выступить единой цифровой информационно-сервисной площадкой, которая выполнит функцию налогового мониторинга в отношении налогообложения объектов недвижимого имущества",
+      shortDesc:
+        "Современная технологическая платформа с широким набором возможностей и инструментов.",
       link: "https://ownex.pro/",
       screenshots: [ownex1, ownex2, ownex3, ownex4],
     },
@@ -247,54 +46,21 @@ export default function Projects() {
       id: 1,
       title: "M3",
       desc: "M3 - cовременная технологическая платформа с широким набором возможностей и инструментов. Может выступить единой цифровой информационно-сервисной площадкой, которая выполнит функцию налогового мониторинга в отношении налогообложения объектов недвижимого имущества",
+      shortDesc:
+        "M3 - cовременная технологическая платформа с широким набором возможностей и инструментов.",
       // link: "https://m3.pro/",
       screenshots: [m31, m32, m33, m34],
     },
   ];
 
-  const nodeRef = useRef(null);
-  const nodeRef2 = useRef(null);
-
-  const switchProject = () => {
-    setCurrentProject((currentProject + 1) % projects.length);
-  };
-
   return (
-    <>
-      <div className="split-screen grid gap-x-10 lg:grid-cols-2">
-        <SwitchTransition>
-          <CSSTransition
-            key={currentProject}
-            nodeRef={nodeRef}
-            timeout={500}
-            classNames="slide-left"
-          >
-            <div className="flex place-items-center" ref={nodeRef}>
-              <RenderDescription
-                project={projects[currentProject]}
-                switchProject={switchProject}
-              />
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
-
-        <SwitchTransition>
-          <CSSTransition
-            key={currentProject}
-            nodeRef={nodeRef2}
-            timeout={500}
-            classNames="slide-right"
-          >
-            <div className="hidden lg:block" ref={nodeRef2}>
-              <RenderGallery project={projects[currentProject]} />
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
+    <div className="flex flex-col gap-5 mt-12 md:mt-0 md:mb-40 w-full">
+      <h2 className="text-4xl font-bold sm:text-5xl md:text-7xl">Проекты</h2>
+      <div className="split-two flex flex-wrap justify-between w-full gap-4 md:mt-4">
+        {projects.map((project) => (
+          <RenderProject project={project} key={project.id} />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
-
-/* TODO
-arrow bug
-*/

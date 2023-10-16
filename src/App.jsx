@@ -224,7 +224,9 @@ function App() {
                 timeout={500}
                 classNames="fade"
               >
-                <div ref={nodeRef}>{screens[currentScreen]}</div>
+                <div className="w-full" ref={nodeRef}>
+                  {screens[currentScreen]}
+                </div>
               </CSSTransition>
             </SwitchTransition>
           </div>
