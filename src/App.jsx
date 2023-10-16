@@ -4,7 +4,8 @@ import "./App.css";
 import videoBg from "./assets/building-timelapse2.mp4";
 import videoBgSmall from "./assets/building-timelapse-cropped.mp4";
 import spinner from "./assets/logo-once.gif";
-import logoMobile from "./assets/logo-mobile.svg";
+import PropTypes from "prop-types";
+// import logoMobile from "./assets/logo-mobile.svg";
 
 // screens
 import Home from "./screens/Home";
@@ -78,6 +79,12 @@ const Navigation = ({ navigation, setNavigation, device }) => {
   }
 };
 
+Navigation.propTypes = {
+  navigation: PropTypes.array,
+  setNavigation: PropTypes.func,
+  device: PropTypes.string,
+};
+
 function App() {
   const [navigation, setNavigation] = useState([
     {
@@ -109,12 +116,11 @@ function App() {
       icon: "question",
     },
   ]);
-  const [currentScreen, setCurrentScreen] = useState("home");
 
-  // const [isLoading, setIsLoading] = useState(true);
+  const [currentScreen, setCurrentScreen] = useState("home");
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [spinnerShown, setSpinnerShown] = useState(true);
-  const [spinnerStarted, setSpinnerStarted] = useState(false);
+  // const [spinnerStarted, setSpinnerStarted] = useState(false);
   const [overlayShown, setOverlayShown] = useState(true);
   const [spinnerAnimationeEnded, setSpinnerAnimationEnded] = useState(false);
 
@@ -172,8 +178,6 @@ function App() {
             muted
             onLoadedData={() => {
               setVideoLoaded(true);
-              // setTimeout(() => {
-              // }, 5000);
             }}
           ></video>
           <video
@@ -184,8 +188,6 @@ function App() {
             muted
             onLoadedData={() => {
               setVideoLoaded(true);
-              // setTimeout(() => {
-              // }, 5000);
             }}
           ></video>
         </div>
@@ -193,7 +195,6 @@ function App() {
           <nav className="header items-center h-24 hidden px-12 lg:flex xl:px-0">
             <div className="logo">
               <a href="https://consul.group" target="_blank" rel="noreferrer">
-                {/* <img src={logo} className="logo" alt="Consul logo" /> */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="181"
@@ -270,5 +271,5 @@ export default App;
 
 /*
 TODO
-loader for initial video load
+spinner not showing on reload
 */

@@ -1,30 +1,29 @@
 import { useState, useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+
+// assets
 import ownex1 from "../assets/screenshots/ownex1.png";
 import ownex2 from "../assets/screenshots/ownex2.png";
 import ownex3 from "../assets/screenshots/ownex3.png";
 import ownex4 from "../assets/screenshots/ownex4.png";
 import m31 from "../assets/screenshots/m3-1.png";
 import m32 from "../assets/screenshots/m3-2.png";
+import m33 from "../assets/screenshots/m3-3.png";
+import m34 from "../assets/screenshots/m3-4.png";
 import ownexLogo from "../assets/ownex-logo.svg";
 
 // transitions
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 
-const preloadSrcList = [ownex1, ownex2, ownex3, ownex4, m31, m32];
-
-// const preloadImages = (src) => new Promise((res) => {
-//   const img = new Image()
-//   img.onload = () => {
-//     res(img)
-//   }
-//   img.src = src
-// })
+// preload screenshots
+const preloadSrcList = [ownex1, ownex2, ownex3, ownex4, m31, m32, m33, m34];
 
 const RenderDescription = ({ project, switchProject }) => {
   const [link, setLink] = useState("");
   const [arrowHoverOver, setArrowHoverOver] = useState(null);
 
   useEffect(() => {
+    if (!project.link) return;
     let interval;
     let counter = 0;
 
@@ -121,20 +120,27 @@ const RenderDescription = ({ project, switchProject }) => {
       <p className="text-md leading-8 sm:text-2xl md:leading-9 lg:max-w-3xl">
         {project.desc}
       </p>
-      <p className="text-gray-400">
-        Подробнее: &nbsp; <br />
-        <a href={project.link} target="_blank" rel="noreferrer">
-          {link}
-        </a>
-      </p>
+      {project.link && (
+        <p className="text-gray-400">
+          Подробнее: &nbsp; <br />
+          <a href={project.link} target="_blank" rel="noreferrer">
+            {link}
+          </a>
+        </p>
+      )}
     </div>
   );
 };
 
+RenderDescription.propTypes = {
+  project: PropTypes.object,
+  switchProject: PropTypes.func,
+};
+
 const RenderGallery = ({ project }) => {
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [lastState, setLastState] = useState({});
+  // const [isFullScreen, setIsFullScreen] = useState(false);
+  // const [lastState, setLastState] = useState({});
 
   const nodeRef3 = useRef(null);
 
@@ -145,46 +151,47 @@ const RenderGallery = ({ project }) => {
     });
   }, []);
 
-  const handleFullScreen = (ref) => {
-    if (isFullScreen) {
-      setIsFullScreen(false);
-      ref.current.setAttribute(
-        "style",
-        `top: ${lastState.y}px; left: ${lastState.x}px; height: ${
-          lastState.height
-        }px; width: ${lastState.width + 64}px`
-      );
-      ref.current.classList.remove("absolute");
-    } else {
-      setIsFullScreen(true);
-      ref.current.setAttribute(
-        "style",
-        `top: ${ref.current.y}px; left: ${ref.current.x}px; height: ${
-          ref.current.height
-        }px; width: ${ref.current.width + 64}px`
-      );
+  // const handleFullScreen = (ref) => {
+  //   if (isFullScreen) {
+  //     setIsFullScreen(false);
+  //     ref.current.setAttribute(
+  //       "style",
+  //       `top: ${lastState.y}px; left: ${lastState.x}px; height: ${
+  //         lastState.height
+  //       }px; width: ${lastState.width + 64}px`
+  //     );
+  //     ref.current.classList.remove("absolute");
+  //   } else {
+  //     setIsFullScreen(true);
+  //     ref.current.setAttribute(
+  //       "style",
+  //       `top: ${ref.current.y}px; left: ${ref.current.x}px; height: ${
+  //         ref.current.height
+  //       }px; width: ${ref.current.width + 64}px`
+  //     );
 
-      const w = ref.current.width;
-      const h = ref.current.height;
-      const x = ref.current.x;
-      const y = ref.current.y;
+  //     const w = ref.current.width;
+  //     const h = ref.current.height;
+  //     const x = ref.current.x;
+  //     const y = ref.current.y;
 
-      setLastState((items) => ({
-        ...items,
-        x,
-        y,
-        width: w,
-        height: h,
-      }));
+  //     setLastState((items) => ({
+  //       ...items,
+  //       x,
+  //       y,
+  //       width: w,
+  //       height: h,
+  //     }));
 
-      ref.current.classList.add("absolute");
+  //     ref.current.classList.add("absolute");
 
-      ref.current.setAttribute(
-        "style",
-        `top: 50%; left: 50%; transform: translate(-50%, -50%)`
-      );
-    }
-  };
+  //     ref.current.setAttribute(
+  //       "style",
+  //       `top: 50%; left: 50%; transform: translate(-50%, -50%)`
+  //     );
+  //   }
+  // };
+
   return (
     <div className="prod-images flex flex-col items-center gap-4">
       <div className="image-container w-full lg:mt-20 xl:mt-8">
@@ -221,6 +228,10 @@ const RenderGallery = ({ project }) => {
   );
 };
 
+RenderGallery.propTypes = {
+  project: PropTypes.object,
+};
+
 export default function Projects() {
   const [currentProject, setCurrentProject] = useState(0);
 
@@ -236,8 +247,8 @@ export default function Projects() {
       id: 1,
       title: "M3",
       desc: "M3 - cовременная технологическая платформа с широким набором возможностей и инструментов. Может выступить единой цифровой информационно-сервисной площадкой, которая выполнит функцию налогового мониторинга в отношении налогообложения объектов недвижимого имущества",
-      link: "https://m3.pro/",
-      screenshots: [m31, m32],
+      // link: "https://m3.pro/",
+      screenshots: [m31, m32, m33, m34],
     },
   ];
 
@@ -285,6 +296,5 @@ export default function Projects() {
 }
 
 /* TODO
-loader for screenshots
 arrow bug
 */
