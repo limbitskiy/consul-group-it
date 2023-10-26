@@ -19,7 +19,7 @@ const RenderGallery = ({ project }) => {
       <div className="image-container w-full lg:mt-20 xl:mt-8">
         {project.media[currentMedia].type === "video" ? (
           <video
-            src={`/assets/videos/${project.media[currentMedia].name}`}
+            src={`/consul-it/assets/videos/${project.media[currentMedia].name}`}
             className="w-full h-full object-cover hidden lg:block"
             muted
             controls
@@ -28,7 +28,7 @@ const RenderGallery = ({ project }) => {
           <img
             className={`screenshot transition-all w-full h-full object-contain lg:h-72 xl:h-96`}
             // src={project.screenshots[currentMedia]}
-            src={`/assets/screenshots/${project.media[currentMedia].name}`}
+            src={`/consul-it/assets/screenshots/${project.media[currentMedia].name}`}
             alt=""
           />
         )}
@@ -64,7 +64,7 @@ const RenderDesc = ({ project }) => {
           Презентация: &nbsp;{" "}
           <span className="text-white">
             <a
-              href={`/assets/documents/${project.presentation}`}
+              href={`/consul-it/assets/documents/${project.presentation}`}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -75,7 +75,7 @@ const RenderDesc = ({ project }) => {
       )}
       {project.link && (
         <p className="text-gray-400">
-          Подробнее: &nbsp; <br />
+          Подробнее: &nbsp;
           <a href={project.link} target="_blank" rel="noreferrer">
             {project.link}
           </a>
@@ -96,7 +96,7 @@ export default function SingleProject({ name }: { name: string }) {
         <div className="flex place-items-center">
           <RenderDesc project={project} />
         </div>
-        <div className="hidden lg:block mt-4">
+        <div className="hidden lg:block mt-6">
           <RenderGallery project={project} />
         </div>
       </div>

@@ -4,7 +4,11 @@ import "./index.scss";
 
 // router
 import ErrorPage from "./error-page";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createHashRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 // routes
 import Root from "./routes/root.jsx";
@@ -14,7 +18,7 @@ import Projects from "./routes/projects.jsx";
 import Contacts from "./routes/contacts.jsx";
 import SingleProject from "./routes/singleProject.tsx";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Root />,

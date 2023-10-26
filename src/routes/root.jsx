@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { Outlet, Link, NavLink, useLoaderData, Form } from "react-router-dom";
+import {
+  Outlet,
+  Link,
+  NavLink,
+  useLoaderData,
+  Form,
+  useLocation,
+} from "react-router-dom";
 // import { getContacts, createContact } from "../contacts";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import spinner from "../assets/logo-once.gif";
@@ -86,6 +93,8 @@ export default function Root() {
   const nodeRef2 = useRef(null);
   const gif = useRef(null);
 
+  const location = useLocation();
+
   return (
     <>
       <div className="screen w-screen relative z-10">
@@ -134,7 +143,7 @@ export default function Root() {
           <div className="content flex place-items-center justify-center px-2 sm:px-12 lg:justify-start xl:px-0">
             <SwitchTransition>
               <CSSTransition
-                key={currentScreen}
+                key={location}
                 nodeRef={nodeRef}
                 timeout={500}
                 classNames="fade"
