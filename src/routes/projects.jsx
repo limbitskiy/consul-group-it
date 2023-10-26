@@ -8,8 +8,8 @@ const RenderProject = ({ project }) => {
       <Link to={project.route}>
         <h3 className="sub-heading">{project.title}</h3>
       </Link>
-      <p className="max-w-3xl sm:text-base lg:text-xl xl:text-2xl xl:leading-10">
-        {project.desc}
+      <p className="max-w-3xl text-sm sm:text-base lg:text-xl xl:text-2xl xl:leading-10">
+        {innerHeight < 600 ? project.shortDesc : project.desc}
       </p>
     </div>
   );
